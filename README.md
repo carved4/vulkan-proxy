@@ -31,7 +31,7 @@ the poc showcases two different payloads:
 2.  a more advanced technique that uses the vulnerability as a gadget to make direct syscalls. this allows the poc to allocate memory, write shellcode, mark it as executable, and run it in a new thread, all while bypassing common user-mode api hooking mechanisms used by security products. the shellcode in this example launches `calc.exe`.
 int64_t* rax_1  {Register rax}
 int64_t* arg1  {Register rcx}
-
+```
 1800358e0    {
 1800358e0        if (arg1)
 1800358e7        {
@@ -49,3 +49,4 @@ int64_t* arg1  {Register rcx}
 180035928        sub_18006c41c();
 180035928        /* no return */
 1800358e0    }
+```
