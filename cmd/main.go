@@ -44,7 +44,7 @@ func main() {
     runtime.KeepAlive(titleUTF16)
     runtime.KeepAlive(msgUTF16)
 
-    if err := testDirectSyscallsViaDriver(uintptr(funcaddr), &ex); err != nil {
+    if err := testDirectSyscallsViaVulkan(uintptr(funcaddr), &ex); err != nil {
         fmt.Println("direct syscalls test error:", err)
     }
 }
@@ -57,7 +57,7 @@ const (
     PAGE_EXECUTE_READ    = 0x20
 )
 
-func testDirectSyscallsViaDriver(driverFunc uintptr, ex *EG_STR) error {
+func testDirectSyscallsViaVulkan(driverFunc uintptr, ex *EG_STR) error {
     // Resolve syscall numbers
     allocSSN, _, err := wc.GetSyscallWithAntiHook("NtAllocateVirtualMemory")
     if err != nil { return fmt.Errorf("resolve NtAllocateVirtualMemory: %w", err) }
