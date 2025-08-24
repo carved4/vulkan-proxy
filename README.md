@@ -7,7 +7,7 @@ a proof-of-concept demonstrating proxy execution in `vulkan-1.dll`.
 original research and writeup by [@whokilleddb](https://twitter.com/whokilleddb).
 the details can be found here: https://github.com/whokilleddb/function-collections/tree/main/hijack_callbacks/vkAllocateMemory
 
-## the bug
+## details
 
 this behavior exists in multiple exported functions within `vulkan-1.dll`, such as `vkAllocateMemory` and `vkCreateSamplerYcbcrConversion`. it stems from a flawed argument validation mechanism. (literally all the vk* functions can be used, just identify the rax_1[..] value in the disassembly of target func and set your function ptr to that index in the crafted struct that correlates to said value, as long as checksum is in pos 0 you will satisfy the check and it will reach your function ptr in the vtable to execute)
 
