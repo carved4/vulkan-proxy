@@ -9,7 +9,7 @@ the details can be found here: https://github.com/whokilleddb/function-collectio
 
 ## details
 
-this behavior exists in multiple exported functions within `vulkan-1.dll`, such as `vkAllocateMemory` and `vkCreateSamplerYcbcrConversion`. it stems from a flawed argument validation mechanism. (literally all the vk* functions can be used, just identify the rax_1[..] value in the disassembly of target func and set your function ptr to that index in the crafted struct that correlates to said value, as long as checksum is in pos 0 you will satisfy the check and it will reach your function ptr in the vtable to execute)
+this behavior exists in multiple exported functions within `vulkan-1.dll`, such as `vkAllocateMemory` and `vkCreateSamplerYcbcrConversion`. it stems from a flawed argument validation mechanism. (literally all the functions can be used, just identify the rax_1[..] value in the disassembly of target func and set your function ptr to that index in the crafted struct that correlates to said value, as long as checksum is in pos 0 you will satisfy the check and it will reach your function ptr in the vtable to execute)
 
 the functions expect a pointer to a structure as an argument. the code proceeds to check for a magic value (`0x10aded040410aded`) within a nested structure. if this magic value is found, the code assumes the structure is legitimate and performs an indirect call to a function pointer located at a hardcoded offset within that same structure.
 
